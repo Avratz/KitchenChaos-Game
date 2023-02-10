@@ -23,6 +23,26 @@ public class ClearCounter : BaseCounter
         KitchenObject.KitchenObjectParent = player;
         KitchenObject = null;
       }
+      else
+      {
+        if (player.KitchenObject.TryGetPlate(out PlateKitchenObject plateKitchenObject))
+        {
+          if (plateKitchenObject.TryAddIngredient(KitchenObject.KitchenObjectSO))
+          {
+            KitchenObject.DestroySelf();
+          }
+        }
+        else
+        {
+          if (KitchenObject.TryGetPlate(out plateKitchenObject))
+          {
+            if (plateKitchenObject.TryAddIngredient(player.KitchenObject.KitchenObjectSO))
+            {
+              player.KitchenObject.DestroySelf();
+            }
+          }
+        }
+      }
     }
   }
 }
