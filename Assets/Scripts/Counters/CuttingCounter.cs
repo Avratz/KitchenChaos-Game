@@ -5,7 +5,17 @@ using UnityEngine;
 
 public class CuttingCounter : BaseCounter, IHasProgress
 {
+  // This is a static event, so it will be called for all instances of CuttingCounter
+  // This is not going to be destroyed when the scene is unloaded (!)
   public static event EventHandler OnAnyCut;
+
+  new public static void ResetStaticData()
+  {
+    OnAnyCut = null;
+  }
+
+  // -- end static 
+
 
   public event EventHandler<IHasProgress.OnProgressEventArgs> OnProgressChanged;
   public event EventHandler OnCut;
